@@ -1,0 +1,9 @@
+
+perlpod.pl - RSS podcast download script
+
+I did not write this script, I have just made a few modifications.
+
+I no longer have the location of where the script came from.
+
+The urls specified in .feeds are downloaded. Each podcast is downloaded into a directory named from the podcast name.
+
