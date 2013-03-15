@@ -31,7 +31,9 @@ sub feed_read($)
   print "\n--> $rss_url\n" if ($verbose > VERBOSE_LVL2);
 
   my $rss = get ( $rss_url );
-	$rss =~ s/[\r\n]//g;
+  die "failed to get $rss_url" unless defined $rss;
+
+  $rss =~ s/[\r\n]//g;
   my $channel_title = parse_channel_title( $rss );
   while( $rss =~ /(\<item\>.*?\<\/item\>)/sg )
   {
@@ -101,7 +103,7 @@ sub parse_filename($)
 
 sub read_feedlist($) {
   my ($filename) = @_;
-  open FEEDLIST, "$filename";
+  open FEEDLIST, "$filename" || die "could not open '$filename'";
   while( my $feed = <FEEDLIST> ) {
     chomp( $feed );
     feed_read ($feed) unless ( $feed =~ /^#/ )
